@@ -2,6 +2,7 @@ package com.example.schema
 
 import net.corda.core.schemas.MappedSchema
 import net.corda.core.schemas.PersistentState
+import java.time.Instant
 import java.util.*
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -26,12 +27,24 @@ object IOUSchemaV1 : MappedSchema(
             var lenderName: String,
 
             @Column(name = "borrower")
-            var borrowerName: String,
+            var borrowerName: String = "",
 
             @Column(name = "value")
-            var value: Int,
+            var value: Int = 0,
+
+            @Column(name = "dteDate")
+            val dteDate: Instant = Instant.now(),
+
+            @Column(name = "paymentValue")
+            val paymentValue:Int = 0,
+
+            @Column(name = "interest")
+            val interest: Int = 0,
+
+            @Column(name = "status")
+            val status: String = "",
 
             @Column(name = "linear_id")
-            var linearId: UUID
+            var linearId: UUID = UUID.randomUUID()
     ) : PersistentState()
 }
